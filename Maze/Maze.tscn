@@ -1,82 +1,180 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Maze/Maze.gd" type="Script" id=1]
-[ext_resource path="res://Player/Player.gd" type="Script" id=2]
-[ext_resource path="res://UI/Menu.gd" type="Script" id=3]
-
-[sub_resource type="CapsuleMesh" id=1]
-radius = 0.5
-
-[sub_resource type="SpatialMaterial" id=2]
-albedo_color = Color( 0.133333, 0.545098, 0.901961, 1 )
-
-[sub_resource type="CapsuleShape" id=3]
-radius = 0.5
-
-[sub_resource type="BoxShape" id=4]
-margin = 0.001
-extents = Vector3( 0.4, 0.1, 0.4 )
+[ext_resource path="res://Assets/last_fight.mp3" type="AudioStream" id=1]
+[ext_resource path="res://Enemies/Enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Maze/Tile0.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Maze/Tile5.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Maze/Tile12.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Maze/Tile14.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Maze/Tile6.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Maze/Tile8.tscn" type="PackedScene" id=9]
 
 [node name="Game" type="Spatial"]
 
 [node name="Maze" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -2, -0.5 )
-script = ExtResource( 1 )
 
-[node name="Player" type="KinematicBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
-script = ExtResource( 2 )
+[node name="Player" parent="Maze" instance=ExtResource( 3 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, 3, 0.5 )
 
-[node name="MeshInstance" type="MeshInstance" parent="Player"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, 0 )
-mesh = SubResource( 1 )
-material/0 = SubResource( 2 )
+[node name="Enemy" parent="Maze" instance=ExtResource( 2 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.5, 1, 1.5 )
 
-[node name="Body" type="CollisionShape" parent="Player"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, 0 )
-shape = SubResource( 3 )
+[node name="Enemy3" parent="Maze" instance=ExtResource( 2 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -9, 1, -1 )
 
-[node name="Feet" type="CollisionShape" parent="Player"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0 )
-shape = SubResource( 4 )
+[node name="Enemy2" parent="Maze" instance=ExtResource( 2 )]
+transform = Transform( 0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -9, 1, 5.5 )
 
-[node name="Pivot" type="Spatial" parent="Player"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+[node name="Tile" parent="Maze" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, 1 )
 
-[node name="Camera" type="Camera" parent="Player/Pivot"]
-current = true
+[node name="Tile22" parent="Maze" instance=ExtResource( 7 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -7.5, 1, 9 )
 
-[node name="Menu" type="Control" parent="."]
-pause_mode = 2
-visible = false
-margin_right = 40.0
-margin_bottom = 40.0
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Tile2" parent="Maze" instance=ExtResource( 6 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.5, 1, -1 )
 
-[node name="ColorRect" type="ColorRect" parent="Menu"]
-margin_right = 1024.0
-margin_bottom = 600.0
-color = Color( 0, 0, 0, 0.25098 )
+[node name="Tile3" parent="Maze" instance=ExtResource( 8 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.5, 1, -1 )
 
-[node name="Restart" type="Button" parent="Menu"]
-margin_left = 474.0
-margin_top = 250.0
-margin_right = 574.0
-margin_bottom = 290.0
-text = "Restart"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Tile41" parent="Maze" instance=ExtResource( 8 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -5.5, 1, -1 )
 
-[node name="Quit" type="Button" parent="Menu"]
-margin_left = 474.0
-margin_top = 300.0
-margin_right = 574.0
-margin_bottom = 340.0
-text = "Quit"
+[node name="Tile45" parent="Maze" instance=ExtResource( 8 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -7.5, 1, -1 )
 
-[connection signal="pressed" from="Menu/Restart" to="Menu" method="_on_Restart_pressed"]
-[connection signal="pressed" from="Menu/Quit" to="Menu" method="_on_Quit_pressed"]
+[node name="Tile37" parent="Maze" instance=ExtResource( 8 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -9.5, 1, 3 )
+
+[node name="Tile17" parent="Maze" instance=ExtResource( 8 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -3.5, 1, 3 )
+
+[node name="Tile13" parent="Maze" instance=ExtResource( 6 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.5, 1, 11 )
+
+[node name="Tile14" parent="Maze" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 1, 11 )
+
+[node name="Tile21" parent="Maze" instance=ExtResource( 8 )]
+transform = Transform( 1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -7.5, 1, 11 )
+
+[node name="Tile30" parent="Maze" instance=ExtResource( 8 )]
+transform = Transform( 1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -11.5, 1, 11 )
+
+[node name="Tile31" parent="Maze" instance=ExtResource( 8 )]
+transform = Transform( 1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -11.5, 1, 7 )
+
+[node name="Tile38" parent="Maze" instance=ExtResource( 8 )]
+transform = Transform( 1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -11.5, 1, 3 )
+
+[node name="Tile35" parent="Maze" instance=ExtResource( 8 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -11.5, 1, 5 )
+
+[node name="Tile48" parent="Maze" instance=ExtResource( 8 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -11.5, 1, -1 )
+
+[node name="Tile4" parent="Maze" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 1, 1 )
+
+[node name="Tile18" parent="Maze" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 1, 3 )
+
+[node name="Tile46" parent="Maze" instance=ExtResource( 9 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -9.5, 1, 1 )
+
+[node name="Tile49" parent="Maze" instance=ExtResource( 9 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -9.5, 1, -1 )
+
+[node name="Tile47" parent="Maze" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.5, 1, 1 )
+
+[node name="Tile40" parent="Maze" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 1, 1 )
+
+[node name="Tile42" parent="Maze" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 1, 1 )
+
+[node name="Tile43" parent="Maze" instance=ExtResource( 9 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3.5, 1, -1 )
+
+[node name="Tile5" parent="Maze" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 1, 3 )
+
+[node name="Tile6" parent="Maze" instance=ExtResource( 9 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.5, 1, 3 )
+
+[node name="Tile8" parent="Maze" instance=ExtResource( 9 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.5, 1, 5 )
+
+[node name="Tile9" parent="Maze" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 1, 7 )
+
+[node name="Tile10" parent="Maze" instance=ExtResource( 9 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.5, 1, 7 )
+
+[node name="Tile11" parent="Maze" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 1, 9 )
+
+[node name="Tile15" parent="Maze" instance=ExtResource( 9 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.5, 1, 5 )
+
+[node name="Tile16" parent="Maze" instance=ExtResource( 9 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.5, 1, 5 )
+
+[node name="Tile28" parent="Maze" instance=ExtResource( 9 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.5, 1, 5 )
+
+[node name="Tile33" parent="Maze" instance=ExtResource( 9 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.5, 1, 9 )
+
+[node name="Tile34" parent="Maze" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.5, 1, 9 )
+
+[node name="Tile32" parent="Maze" instance=ExtResource( 9 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.5, 1, 11 )
+
+[node name="Tile20" parent="Maze" instance=ExtResource( 9 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.5, 1, 11 )
+
+[node name="Tile23" parent="Maze" instance=ExtResource( 9 )]
+transform = Transform( 1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, -5.5, 1, 9 )
+
+[node name="Tile12" parent="Maze" instance=ExtResource( 9 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.5, 1, 9 )
+
+[node name="Tile7" parent="Maze" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 1, 5 )
+
+[node name="Tile36" parent="Maze" instance=ExtResource( 5 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.5, 1, 5 )
+
+[node name="Tile19" parent="Maze" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 1, 11 )
+
+[node name="Tile24" parent="Maze" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 1, 7 )
+
+[node name="Tile26" parent="Maze" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 1, 7 )
+
+[node name="Tile39" parent="Maze" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 1, 3 )
+
+[node name="Tile44" parent="Maze" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 1, 1 )
+
+[node name="Tile27" parent="Maze" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 1, 7 )
+
+[node name="Tile29" parent="Maze" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 1, 7 )
+
+[node name="Tile25" parent="Maze" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 1, 9 )
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+volume_db = 0.1
+autoplay = true

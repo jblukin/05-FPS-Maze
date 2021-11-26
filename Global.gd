@@ -5,7 +5,10 @@ func _ready():
 
 func _unhandled_input(event):
 	if event.is_action_pressed("menu"):
-		#get_tree().quit()
+		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		var menu = get_node_or_null("/root/Game/Menu")
 		if menu != null:
 			if not menu.visible:

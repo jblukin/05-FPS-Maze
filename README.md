@@ -13,6 +13,8 @@ Maze Generation is an adaptation of the excellent tutorial from [KidsCanCode](ht
 
 The font, Bebas Neue Regular (Ryoichi Tsunekawa) was downloaded from [https://fontlibrary.org/en/font/bebasneueregular](https://fontlibrary.org/en/font/bebasneueregular)
 
+The shotgun model is from the [Weapon Pack](https://kenney.nl/assets/weapon-pack) at kenney.nl.
+
 ## Future Development
 None
 
