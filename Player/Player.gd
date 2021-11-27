@@ -19,6 +19,10 @@ var velocity = Vector3()
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	if Global.which_player == 1:
+		$MeshInstance.get_surface_material(0).albedo_color = Color8(34,139,230)
+	else:
+		$MeshInstance.get_surface_material(0).albedo_color = Color8(250,82,82)
 	
 func _process(delta):
 	if counter <= 0:
@@ -63,3 +67,6 @@ func update_counter(s):
 	if Counter != null:
 		counter -= s
 		Counter.text = "Enemies Remaining: " + str(counter)
+		
+remote func _set_position(pos):
+	global_transform.origin = pos

@@ -1,5 +1,8 @@
 extends Node
 
+var which_player = 0
+var player2id = -1
+
 func _ready():
 	pause_mode = PAUSE_MODE_PROCESS
 
